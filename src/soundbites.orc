@@ -2,8 +2,8 @@
 
 ; Clang, as a strike on a metal bar
 instr Clang
-    iAmp = p4
     iDur = p3 ; duration determines 30db decay time
+    ;iAmp = p4 ; FIXME: iAmp is not used for barmodel
     ; params for a simple metal clang
     iHFloss = 0.1 ; high-frequency loss; lower is brighter, higher duller
     iPos = 0.837 ; strike position, very sensitive to strike width
@@ -14,6 +14,29 @@ instr Clang
     kScan = 0.6
     ; Let there be a clang sound
     aClang barmodel 2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
+    aSig = aClang
+    outs aSig, aSig
+endin
+
+; Bonk, as a strike against wood
+instr Bonk
+    ; Same as Clang, except:
+    ; stiffness lower, ~100
+    ; iHFloss higher, ~1-5 (up to 10, which is more like a tap)
+    ; iWid ~10x wider (greater than 0.2 quickly leads to clipping)
+    ; Lessened strike velocity, since these settings are inherently louder
+    iDur = p3 ; duration determines 30db decay time
+    ; iAmp = p4; FIXME: iAmp not used
+    ; params for a simple metal clang
+    iHFloss = 5 ; high-frequency loss; lower is brighter, higher duller
+    iPos = 0.837 ; strike position, very sensitive to strike width
+    iVel = 5000 ; strike velocity
+    iWid = 0.2 ; strike width; lower is sharper/brighter
+    ; scan frequency. subsonic values give nice modulation,
+    ; audible range leads to changes in timbre
+    kScan = 0.6
+    ; Let there be a clang sound
+    aClang barmodel 2, 2, 100, iHFloss, kScan, iDur, iPos, iVel, iWid
     aSig = aClang
     outs aSig, aSig
 endin
