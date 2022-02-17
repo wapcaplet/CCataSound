@@ -25,6 +25,24 @@ Or you can skip installing and go to
 to hear the demo in your browser, or experiment with your own Csounds.
 
 
+## Philosophy
+
+In theory Csound can generate not just approximations of real-world instruments and sounds, but any
+sound we can imagine - strange, otherworldly sounds, impossible to make with physical instruments.
+
+In practice synthetic sound effects and music tend to be quite distinct from real-world recorded
+sounds and instruments; their artificiality is clear to most listeners. Well-crafted synth sounds
+can be convincingly realistic, but even the simplest real-world sounds are rich with harmonic
+changes over time, and difficult to model with synthesizers.
+
+Thus the design philosophy of CCataSound is to create sounds that are evocative and believable, if
+not entirely accurate or realistic.
+
+Many Cataclysm phenomena - giant insects, electrified zombies, and portal storms - are weird and
+fantastic, and CDDA leans into that for gameplay effect. CCataSound should do as well, and take
+advantage of the bottomless reservoir of sonic possibility that Csound provides.
+
+
 ## Csound references
 
 - [Csound Web IDE](https://ide.csound.com/)
