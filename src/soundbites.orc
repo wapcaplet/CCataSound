@@ -1,5 +1,23 @@
 ; Partial or component sounds that may be reused for several effects
 
+; Clang, as a strike on a metal bar
+instr Clang
+    iAmp = p4
+    iDur = p3 ; duration determines 30db decay time
+    ; params for a simple metal clang
+    iHFloss = 0.1 ; high-frequency loss; lower is brighter, higher duller
+    iPos = 0.837 ; strike position, very sensitive to strike width
+    iVel = 16000 ; strike velocity
+    iWid = 0.02 ; strike width; lower is sharper/brighter
+    ; scan frequency. subsonic values give nice modulation,
+    ; audible range leads to changes in timbre
+    kScan = 0.6
+    ; Let there be a clang sound
+    aClang barmodel 2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
+    aSig = aClang
+    outs aSig, aSig
+endin
+
 ; Latching sound, as on a door
 instr DoorLatch
     iAmp = p4
