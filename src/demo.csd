@@ -9,10 +9,14 @@ ksmps  = 10
 nchnls = 2
 
 #include "soundbites.orc"
+#include "soundscapes.orc"
 #include "effects.orc"
 
 </CsInstruments>
 <CsScore>
+i "Reverb" 0 60
+i "Wailing" 0 60 8000 500
+
 i "WalkDirt" 0 1 5000
 i "WalkDirt" ^+.5 1 5000
 i "WalkGrass" ^+.5 1 5000
