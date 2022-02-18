@@ -1,120 +1,100 @@
 ; Partial or component sounds that may be reused for several effects
 
-; Clang, as a strike on a metal bar
-instr Clang
-    iDur = p3 ; duration determines 30db decay time
-    ;iAmp = p4 ; FIXME: iAmp is not used for barmodel
-    ; params for a simple metal clang
-    iHFloss = 0.1 ; high-frequency loss; lower is brighter, higher duller
-    iPos = 0.837 ; strike position, very sensitive to strike width
-    iVel = 16000 ; strike velocity
-    iWid = 0.02 ; strike width; lower is sharper/brighter
-    ; scan frequency. subsonic values give nice modulation,
-    ; audible range leads to changes in timbre
-    kScan = 0.6
-    ; Let there be a clang sound
-    aClang barmodel 2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
-    aSig = aClang
-    outs aSig, aSig
-endin
+                instr           Clang           ; Clang, as a strike on a metal bar
+iDur            =               p3              ; duration determines 30db decay time
+iAmp            =               p4              ; FIXME: iAmp is not used for barmodel
+iHFloss         =               0.1             ; high-frequency loss; lower is brighter, higher duller
+iPos            =               0.837           ; strike position, very sensitive to strike width
+iVel            =               16000           ; strike velocity
+iWid            =               0.02            ; strike width; lower is sharper/brighter
+kScan           =               0.6             ; scanning frequency
+                                                ; subsonic values give nice modulation,
+                                                ; audible range leads to changes in timbre
 
-; Bonk, as a strike against wood
-instr Bonk
-    ; Same as Clang, except:
-    ; stiffness lower, ~100
-    ; iHFloss higher, ~1-5 (up to 10, which is more like a tap)
-    ; iWid ~10x wider (greater than 0.2 quickly leads to clipping)
-    ; Lessened strike velocity, since these settings are inherently louder
-    iDur = p3 ; duration determines 30db decay time
-    ; iAmp = p4; FIXME: iAmp not used
-    ; params for a simple metal clang
-    iHFloss = 5 ; high-frequency loss; lower is brighter, higher duller
-    iPos = 0.837 ; strike position, very sensitive to strike width
-    iVel = 5000 ; strike velocity
-    iWid = 0.2 ; strike width; lower is sharper/brighter
-    ; scan frequency. subsonic values give nice modulation,
-    ; audible range leads to changes in timbre
-    kScan = 0.6
-    ; Let there be a clang sound
-    aClang barmodel 2, 2, 100, iHFloss, kScan, iDur, iPos, iVel, iWid
-    aSig = aClang
-    outs aSig, aSig
-endin
+aClang          barmodel        2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
+aSig            =               aClang
+                outs            aSig, aSig
+                endin
 
-; Latching sound, as on a door
-instr DoorLatch
-    iAmp = p4
-    ; latch click, shaker with 1 bean (500), no extra shakes
-    aShake shaker iAmp, 2000, 500, 0.99, 0
-    aSig = aShake
-    outs aSig, aSig
-endin
 
-; Subtle swish of air, as when opening or closing a door
-instr Swish
-    iDur = p3
-    iAmp = p4
-    ; pink noise with a lowpass filter and triangle envelope
-    aSwish pinkish iAmp/2
-    aSwish lowpass2 aSwish, 200, 1
-    aSwishEnv linseg 0, iDur/2, 1, iDur/2, 0
-    aSig = aSwish * aSwishEnv
-    outs aSig, aSig
-endin
+                instr           Bonk            ; Bonk, as a strike against wood
+iDur            =               p3              ; duration determines 30db decay time
+iAmp            =               p4              ; FIXME: iAmp not used
+                                                ; Same as Clang, except:
+                                                ; stiffness lower, ~100
+                                                ; iHFloss higher, ~1-5 (up to 10, which is more like a tap)
+                                                ; iWid ~10x wider (greater than 0.2 quickly leads to clipping)
+                                                ; Lessened strike velocity (these settings are inherently louder)
+iHFloss         =               5               ; high-frequency loss; lower is brighter, higher duller
+iPos            =               0.837           ; strike position, very sensitive to strike width
+iVel            =               5000            ; strike velocity
+iWid            =               0.2             ; strike width; lower is sharper/brighter
+kScan           =               0.6             ; scanning frequency
 
-; Creak sound, rising in pitch, as when opening a door
-instr CreakRising
-    iDur = p3
-    iAmp = p4
-    kPitchEnv expon 0.05, iDur, 0.001
-    aCreak mpulse iAmp, kPitchEnv
-    aSig = aCreak
-    outs aSig, aSig
-endin
+aClang          barmodel        2, 2, 100, iHFloss, kScan, iDur, iPos, iVel, iWid
+aSig            =               aClang
+                outs            aSig, aSig
+                endin
 
-; Creak sound, falling in pitch, as when closing a door
-instr CreakFalling
-    iDur = p3
-    iAmp = p4
-    kPitchEnv expon 0.001, iDur, 0.05
-    aCreak mpulse iAmp, kPitchEnv
-    aSig = aCreak
-    outs aSig, aSig
-endin
 
-; Solid, low thump or thud, as when a door comes to
-instr Thud
-    iAmp = p4
-    ; Do a pulse with no repeat
-    aPulse mpulse iAmp, 0
-    ; Give pulse a low resonance like wood
-    aThudRes reson aPulse, 60, 25
-    aSig = aThudRes
-    outs aSig, aSig
-endin
+                instr           DoorLatch       ; Latching sound, as on a door
+iAmp            =               p4
+                                                ; latch click, shaker with 1 bean (500), no extra shakes
+aShake          shaker          iAmp, 2000, 500, 0.99, 0
+                                                ; TODO: Add a more definite metallic sound
+aSig            =               aShake
+                outs            aSig, aSig
+                endin
 
-; Swishing through the air, as with a weapon
-instr Whiff
-    iamp = p4
 
-    aNoise unirand 100
-    ; Sweep frequency bandpass from low to high
-    kFreqEnv line 200, p3, 1000
-    aSweep reson aNoise, kFreqEnv, 100
+                instr           Swish           ; Subtle swish of air, as when opening or closing a door
+iDur            =               p3
+iAmp            =               p4
+aSwish          pinkish         iAmp/2          ; pink noise with a lowpass filter and triangle envelope
+aSwish          lowpass2        aSwish, 200, 1
+aSwishEnv       linseg          0, iDur/2, 1, iDur/2, 0
+aSig            =               aSwish * aSwishEnv
+                outs            aSig, aSig
+                endin
 
-    ;kAmpEnv cosseg 0, p3*.9, 0.9, 0, 0.9, p3*.1, 0
-    ;kAmpEnv linseg 0, p3*.9, 1, p3*.1, 0
-    ; expseg gives the best 'whip' effect here
-    kAmpEnv expseg 0.001, p3*.8, 0.901, p3*0.2, 0.001
 
-    asig = aSweep*kAmpEnv
-    outs asig, asig
-endin
+                instr           CreakRising     ; Creak sound, rising in pitch, as when opening a door
+iDur            =               p3
+iAmp            =               p4
+kPitchEnv       expon           0.05, iDur, 0.001
+aCreak          mpulse          iAmp, kPitchEnv
+aSig            =               aCreak
+                outs aSig, aSig
+                endin
 
-; Hitting a solid object like wood, making a sharp rapping sound
-instr Whack
-    iamp = p4
 
-    ; TODO
-endin
+                instr           CreakFalling    ; Creak sound, falling in pitch, as when closing a door
+iDur            =               p3
+iAmp            =               p4
+kPitchEnv       expon           0.001, iDur, 0.05
+aCreak          mpulse          iAmp, kPitchEnv
+aSig            =               aCreak
+                outs            aSig, aSig
+                endin
+
+
+                instr           Thud            ; Solid, low thump or thud, as when a door comes to
+iAmp            =               p4
+aPulse          mpulse          iAmp, 0         ; Do a pulse with no repeat
+aThudRes        reson           aPulse, 60, 25  ; Give pulse a low resonance like wood
+aSig            =               aThudRes
+                outs            aSig, aSig
+                endin
+
+
+                instr           Whiff           ; Swishing through the air, as with a weapon
+iamp            =               p4
+aNoise          unirand         100
+kFreqEnv        line            200, p3, 1000   ; Sweep frequency bandpass from low to high
+aSweep          reson           aNoise, kFreqEnv, 100
+                                                ; expseg gives the best 'whip' effect here
+kAmpEnv         expseg          0.001, p3*.8, 0.901, p3*0.2, 0.001
+asig            =               aSweep*kAmpEnv
+                outs            asig, asig
+                endin
 
