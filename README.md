@@ -50,46 +50,71 @@ However, Csound is oriented less toward nested logical flow, and more toward con
 outputs via some opcodes; it benefits more from indentation that emphasizes visual alignment of
 these operations.
 
-Compare this `Whiff` instrument with plain indentation nesting (like C++ or Python might use):
+Consider this `Whiff` instrument with plain indentation nesting (like C++ or Python might use):
 
 ```
 instr Whiff
-    idur = p3
-    iamp = p4
-    ; white noise
-    anoise unirand 100
-    ; frequency from 200-1000 Hz across duration
-    kfreqenv line 200, p3, 1000
-    ; sweep bandpass filter across frequency
-    asig reson anoise, kfreqenv, 100
-    outs asig, asig
+    iDur = p3 ; duration
+    iAmp = p4 ; amplitude
+
+    ; white noise generator
+    aNoise unirand iAmp
+    ; linear envelope ramping frequency from 200-1000 Hz across the duration
+    kFreqEnv line 200, p3, 1000
+    ; sweep bandpass filter across the envelope with 100 Hz bandwidth
+    aSig reson aNoise, kFreqEnv, 100
+
+    ; output sound in stereo
+    outs aSig, aSig
 endin
 ```
 
-Versus a more idiomatic Csound formatting style, practiced by
+Compare with this more idiomatic Csound formatting style, practiced by
 Richard Boulanger in the [Csound Book](http://www.csounds.com/chapter1/)
 and Iain McCurdy in [Csound Haiku](http://iainmccurdy.org/csoundhaiku.html):
 
 ```
                 instr           Whiff
-idur            =               p3
-iamp            =               p4
-anoise          unirand         100             ; white noise
-kfreqenv        line            200, idur, 1000 ; frequency from 200-1000 Hz across duration
-                                                ; sweep bandpass filter across frequency
-asig            reson           anoise, kfreqenv, 100
-                outs            asig, asig
+iDur            =               p3              ; duration
+iAmp            =               p4              ; amplitude
+
+aNoise          unirand         iAmp            ; white noise generator
+kFreqEnv        line            200, iDur, 1000 ; linear envelope ramping frequency
+                                                ; from 200-1000 Hz across the duration
+
+aSig            reson           aNoise, kFreqEnv, 100
+                                                ; sweep a bandpass filter across the envelope
+                                                ; with 100 Hz bandwidth
+                outs            aSig, aSig      ; output sound in stereo
                 endin
 ```
 
-The latter separates the layout into four columns: output, opcode, input, and comment. Opcodes
-always go in the second column, so the `instr`/`endin` lines are indented (and have no output).
-Reading down the third column you can see all the input parameters.
+The latter separates the layout into four columns: output, opcode, input, and comment, and is the
+style preferred for Csound files in this repository.
 
-Here, 16-space tab stops are used, allowing room for most opcodes and variable names.
+Output(s) always come first, with no indentation. If an opcode has no output, the first column will
+be blank, as are the `instr`, `endin`, and `outs` lines above.
+
+Opcodes always go in the second column. This includes `=` and `if` as well as `unirand` and `reson`.
+
+Reading down third column, one can see all the input parameters, both literal values like `200` and
+variables like `iDur` and `kFreqEnv`.
+
+Finally, descriptive comments begin in the fourth column, just after the inputs, or on the following
+line(s) if the input parameters exceed 16 characters, as they often will.
+
+Style preference notes (subject to change):
+
+- Use four indented "columns" as shown above: output, opcode, input, comments
+- Use 16-space tab stops, and tell your editor to use spaces, not tab characters
+- Keep descriptive comments in the 4th column, after inputs
+- Wrap lines to 120 characters or less (this allows 72 characters for comments)
+- Capitalize and CamelCase instrument names, to distinguish them from builtin opcodes
+- Use CamelCase for variable names (after the type prefix `i`, `k`, `a`)
 
 Pygments includes [lexers for Csound](https://pygments.org/docs/lexers/#lexers-for-csound-languages)
-that could be leveraged to standardize the formatting of all Csound files in this repo.
+that could be leveraged to standardize the formatting of all Csound files in this repo, if and when
+a uniform style is determined.
 
 
 ## Csound references
