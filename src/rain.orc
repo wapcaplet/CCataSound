@@ -10,12 +10,10 @@ iDettack        =               0.01            ; (apparently ignored, or has ne
 iNum            random          5, 10           ; Randomize drip intensity (number of "beads")
                                                 ; Create the drip sound with a fixed small amplitude
                                                 ; (much higher leads to too much clipping)
-aDrip1          dripwater       0.01, iDettack, iNum, iDamp, iMaxShake, iFreq, iFreqRes1, iFreqRes2
-aDrip2          dripwater       0.01, iDettack, iNum, iDamp, iMaxShake, iFreq*0.9, iFreqRes1*0.9, iFreqRes2*0.9
-aDrip3          dripwater       0.01, iDettack, iNum, iDamp, iMaxShake, iFreq*1.1, iFreqRes1*1.1, iFreqRes2*1.1
-
+aRattle         bamboo          0.1, iDettack, 50, 0.05, 0, iFreq ;, iFreq, iF1, iF2
+aJingle         tambourine      0.1, iDettack, 30, 0.75, 0, iFreq ;, iFreq, iF1, iF2
 aNoise          unirand         iAmp*0.1        ; a little white noise never hurt anyone
-aSig            =               aDrip1 + aDrip2 + aDrip3 + aNoise
+aSig            =               aRattle + aJingle + aNoise
 
 kPan            rspline         0, 1, 0.1, 0.2  ; Slow random panning (kind of cheesy sounding)
 aL, aR          pan2            aSig, kPan

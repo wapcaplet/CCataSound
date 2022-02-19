@@ -43,11 +43,7 @@ i "Clang" ^+.5 0.6 1.0
 i "Clang" ^+.5 0.8 1.0
 
 b 10
-i "Raining" 0 10 1 300
-i "Raining" 0 10 1 400
-i "Raining" 0 10 1 500
-i "Raining" 0 10 1 700
-i "Raining" 0 10 1 800
+i "Raining" 0 10 1 600
 e
 
 </CsScore>
