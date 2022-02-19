@@ -12,9 +12,17 @@ nchnls = 2
 #include "soundbites.orc"
 #include "soundscapes.orc"
 #include "effects.orc"
+#include "rain.orc"
 
 </CsInstruments>
 <CsScore>
+i "Raining" 0 10 1 300
+i "Raining" 0 10 1 400
+i "Raining" 0 10 1 500
+i "Raining" 0 10 1 700
+i "Raining" 0 10 1 800
+e
+
 i "Dry" 0 60
 i "Wailing" 0 60 1.0 500
 
