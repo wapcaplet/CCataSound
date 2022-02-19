@@ -100,4 +100,4 @@ that could be leveraged to standardize the formatting of all Csound files in thi
 - [Csound Realtime Examples](http://iainmccurdy.org/csound.html)
 - [The Csound Book, Chapter 1](http://www.csounds.com/chapter1/)
 - [The Canonical Csound Reference Manual](https://csound.com/docs/manual/indexframes.html)
-
+- [Csound Algorithmic Composition Tutorial by Michael Gogins](https://michaelgogins.tumblr.com/post/45943759685/tutorials-for-csound-and-csoundac)
