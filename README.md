@@ -45,10 +45,10 @@ advantage of the bottomless reservoir of sonic possibility that Csound provides.
 
 ## Style and indentation
 
-The readability of many languages benefits each inner logical block is indented at the same level.
-However, Csound is oriented less toward nested logical flow, and more toward connecting inputs to
-outputs via some opcodes; it benefits more from indentation that emphasizes visual alignment of
-these operations.
+The readability of many languages benefits when each inner logical block is indented at the same
+level. However, Csound is oriented less toward nested logical flow, and more toward connecting
+inputs to outputs via some opcodes; it benefits more from indentation that emphasizes visual
+alignment of these operations.
 
 Consider this `Whiff` instrument with plain indentation nesting (like C++ or Python might use):
 
