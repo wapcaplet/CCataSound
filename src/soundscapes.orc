@@ -19,17 +19,27 @@ aL, aR          reverbsc        garevL, garevR, 0.95, 10000
                 endin
 
 
+                instr           Dry             ; Outputs only dry mix (no reverb)
+                outs            gamixL, gamixR
+                clear           gamixL, gamixR
+                endin
+
+
                 instr           Wailing         ; wailing of wind
-iamp            =               p4              ; TODO: use this
+iamp            =               p4
 ipch            =               p5
 
-kfreq           rspline         ipch*0.8, ipch*1.2, 0.3, 0.7
-kbw             rspline         20, 100, 0.2, 0.5
-awhite          unirand         iamp
+awhite          unirand         iamp            ; random noise generators
 apink           pinkish         iamp
 anoise          =               apink + awhite
+
+                                                ; send noise through a bandpass filter with
+                                                ; random variations in frequency and bandwidth
+kfreq           rspline         ipch*0.8, ipch*1.2, 0.3, 0.7
+kbw             rspline         20, 100, 0.2, 0.5
 asig            butterbp        anoise, kfreq, kbw
-kpan            rspline         0, 1, 0.1, 0.3
+
+kpan            rspline         0, 1, 0.1, 0.3  ; randomly pan, slowly
 
 aL, aR          pan2            asig, kpan
 garevL          =               garevL+(aL*0.5) ; send part to reverb
