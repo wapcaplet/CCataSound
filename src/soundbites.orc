@@ -88,13 +88,14 @@ aSig            =               aThudRes
 
 
                 instr           Whiff           ; Swishing through the air, as with a weapon
-iamp            =               p4
-aNoise          unirand         100
-kFreqEnv        line            200, p3, 1000   ; Sweep frequency bandpass from low to high
+iDur            =               p3
+iAmp            =               p4
+aNoise          unirand         iAmp/5
+kFreqEnv        line            200, iDur, 1000   ; Sweep frequency bandpass from low to high
 aSweep          reson           aNoise, kFreqEnv, 100
                                                 ; expseg gives the best 'whip' effect here
-kAmpEnv         expseg          0.001, p3*.8, 0.901, p3*0.2, 0.001
-asig            =               aSweep*kAmpEnv
-                outs            asig, asig
+kAmpEnv         expseg          0.001, iDur*.8, 0.901, iDur*0.2, 0.001
+aSig            =               aSweep*kAmpEnv
+                outs            aSig, aSig
                 endin
 
