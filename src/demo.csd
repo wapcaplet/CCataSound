@@ -16,13 +16,6 @@ nchnls = 2
 
 </CsInstruments>
 <CsScore>
-i "Raining" 0 10 1 300
-i "Raining" 0 10 1 400
-i "Raining" 0 10 1 500
-i "Raining" 0 10 1 700
-i "Raining" 0 10 1 800
-e
-
 i "Dry" 0 60
 i "Wailing" 0 60 1.0 500
 
@@ -48,6 +41,13 @@ i "Clang" ^+.5 0.2 1.0
 i "Clang" ^+.5 0.4 1.0
 i "Clang" ^+.5 0.6 1.0
 i "Clang" ^+.5 0.8 1.0
+
+b 10
+i "Raining" 0 10 1 300
+i "Raining" 0 10 1 400
+i "Raining" 0 10 1 500
+i "Raining" 0 10 1 700
+i "Raining" 0 10 1 800
 e
 
 </CsScore>
