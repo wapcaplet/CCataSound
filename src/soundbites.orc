@@ -89,6 +89,24 @@ aSig            =               aCreak
                 endin
 
 
+                instr           Splat           ; As pulping a wet zombie
+iDur            =               p3
+iAmp            =               p4
+iDet            =               0.01            ; iDettack, ignored
+aPlop           dripwater       0.1, iDet, 100, 2.0, 0, 250, 400, 650
+aSplash         cabasa          0.01, iDet, 2, -1, 0.01
+                                                ; For continuous sound, dripwater uses 2.0 damping, and
+                                                ; cabasa uses 0.01 feedback. dripwater gives the lower-end
+                                                ; plop sounds but its high frequencies aren't convincing, so
+                                                ; cabasa provides the more watery splattering sounds
+kPlopEnv        expseg          iAmp, iDur*.5, 0.1, iAmp*.5, 0.001
+kSplashEnv      expseg          0.1, iDur*.3, iAmp*.5, iDur*.1, 0.1, iDur*.6, 0.001
+                                                ; Envelopes determine when each sound is emphasized
+aSig            =               aPlop * kPlopEnv + aSplash * kSplashEnv
+                outs            aSig, aSig
+                endin
+
+
                 instr           Thud            ; Solid, low thump or thud, as when a door comes to
 iAmp            =               p4
 aPulse          mpulse          iAmp, 0         ; Do a pulse with no repeat
