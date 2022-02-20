@@ -13,11 +13,13 @@ nchnls = 2
 #include "soundscapes.orc"
 #include "effects.orc"
 #include "rain.orc"
+#include "wind.orc"
 
 </CsInstruments>
 <CsScore>
 i "Dry" 0 60
-i "Wailing" 0 60 1.0 500
+; wind params   amp   rumb  blow  howl
+i "Wind" 0 60   0.5   1.0   1.0   1.0
 
 i "WalkDirt" 0 1 0.5
 i "WalkDirt" ^+.5 1 0.5
