@@ -3,25 +3,20 @@
 
 ; Walking on dirt - dry shuffle
 instr WalkDirt
-    iamp = p4
-    ; shaker with 1 shake gives a 2-beat footstep-like sound
-    ashak shaker iamp, 100, 8, 0.99, 1
-    ; sandpaper gives initial step more scuff
-    asand sandpaper iamp/20, 0.01, 500, 0
-    asig = ashak + asand
-
-    outs asig, asig
+    iDur = p3
+    iAmp = p4
+    schedule "Footstep", 0, iDur, iAmp
 endin
 
 ; Walking on grass - soft swish
 instr WalkGrass
-    iamp = p4
-    ; softer step
-    ashak shaker iamp*.5, 100, 8, 0.99, 1
+    iDur = p3
+    iAmp = p4
+    schedule "Footstep", 0, iDur, iAmp*.5
     ; swish with a simple attack/decay envelope
-    aswish pinkish iamp
+    aswish pinkish iAmp
     aenv linseg 0, 0.1, 1, 0.2, 0
-    asig = ashak + aswish*aenv
+    asig = aswish*aenv
 
     outs asig, asig
 endin

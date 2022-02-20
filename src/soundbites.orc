@@ -47,6 +47,17 @@ aSig            =               aShake
                 endin
 
 
+                instr           Footstep        ; Single footstep, heel-toe
+iAmp            =               p4
+iFreq           random          300, 600        ; Pitch frequency
+iBeans          random          5, 20           ; More beans is more scratchy (could be param)
+                                                ; Shaker with 1 shake gives a 2-beat scuffing footstep sound
+aShake          shaker          iAmp, iFreq, iBeans, 0.99, 1
+aSig            =               aShake
+                outs            aSig, aSig      ; TODO: Alternate slight pan to left/right with each step
+                endin
+
+
                 instr           Swish           ; Subtle swish of air, as when opening or closing a door
 iDur            =               p3
 iAmp            =               p4
