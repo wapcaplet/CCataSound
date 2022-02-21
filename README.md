@@ -13,7 +13,7 @@ a proof of concept.
 
 ## Usage
 
-Install [Csound](https://csound.com) for your platform, and run `csound src/demo.csd` for a short
+Install [Csound](https://csound.com) for your platform, and run `csound demo.csd` for a short
 demonstration of existing sound effects, including exciting low-fi renditions of:
 
 - Walking on dirt and grass

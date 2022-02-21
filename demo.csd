@@ -1,6 +1,9 @@
 <CsoundSynthesizer>
 <CsOptions>
 -odac
+; Add both orc and cdda to include path
+--env:INCDIR+=orc
+--env:INCDIR+=cdda
 </CsOptions>
 <CsInstruments>
 sr     = 44100
@@ -11,7 +14,6 @@ nchnls = 2
 
 #include "soundbites.orc"
 #include "soundscapes.orc"
-#include "effects.orc"
 #include "rain.orc"
 #include "wind.orc"
 
