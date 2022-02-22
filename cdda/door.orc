@@ -1,6 +1,7 @@
 ; Door and gate sounds
 
                 instr           DoorOpen        ; Opening door - latch sound, followed by squeak/swish
+;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
                 schedule        "DoorLatch", 0, iDur, iAmp
@@ -10,6 +11,7 @@ iAmp            =               p4
 
 
                 instr           DoorClose       ; Closing door - squeak/swish followed by latch/thump sound
+;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
                 schedule        "CreakFalling", 0, iDur, iAmp
@@ -20,6 +22,7 @@ iAmp            =               p4
 
 
                 instr           GateOpen        ; Opening gate - unlatch and squeak
+;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
                                                 ; FIXME: This door latch isn't good here
@@ -29,6 +32,7 @@ iAmp            =               p4
 
 
                 instr           GateClose       ; Closing gate - squeak and latch
+;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
                 schedule        "Squeak", 0, iDur, iAmp
@@ -39,6 +43,7 @@ iAmp            =               p4
 
 
                 instr           DoorDemo        ; Play all door sounds, pausing 1 s in between
+;----------------------------------------------------------------------------------------------------------------------;
 iAmp            =               p4
                 schedule        "GateOpen", 0, 1, iAmp
                 schedule        "GateClose", 2, 1, iAmp
