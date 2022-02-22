@@ -12,7 +12,9 @@
 ; The main "Wind" instrument will provide a parameterized way to create wind of indefinite length,
 ; with varying intensity and amounts of reactive sounds.
 
+
                 instr           Wind            ; Main wind instrument
+;----------------------------------------------------------------------------------------------------------------------;
 iAmp            =               p4              ; Total amplitude
 iRumbling       =               p5              ; 0-1, amount of low-frequency rumbling or buffeting
 iBlowing        =               p6              ; 0-1, amount of mid-frequency breeze or blowing
