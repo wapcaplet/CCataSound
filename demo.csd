@@ -17,22 +17,29 @@ nchnls = 2
 #include "rain.orc"
 #include "wind.orc"
 
+; From cdda
+#include "door.orc"
+#include "walk.orc"
+
 </CsInstruments>
 <CsScore>
+b 0
+; Walk demo, about 4s long
+i "WalkDemo" 0 10 1
+
+b 5
+; Door demo, about 8s long
+i "DoorDemo" 0 10 1
+
+b 15
+; Wind demo, about 15s long
+; Dry filter, no reverb
 i "Dry" 0 60
 ; wind params   amp   rumb  blow  howl
-i "Wind" 0 60   0.5   1.0   1.0   1.0
+i "Wind" 0 15   0.5   1.0   1.0   1.0
 
-i "WalkDirt" 0 1 0.5
-i "WalkDirt" ^+.5 1 0.5
-i "WalkGrass" ^+.5 1 0.5
-i "WalkGrass" ^+.5 1 0.5
-
-b 2
-i "DoorOpen" 0 0.5 1.0
-i "DoorClose" ^+1 0.5 1.0
-
-b 4
+b 20
+; Various soundbites played during wind
 i "Whiff" 0 0.15 1.0
 i "Whiff" ^+.5 0.2 1.0
 i "Whiff" ^+.5 0.25 1.0
@@ -46,8 +53,10 @@ i "Clang" ^+.5 0.4 1.0
 i "Clang" ^+.5 0.6 1.0
 i "Clang" ^+.5 0.8 1.0
 
-b 10
+b 30
+; Rain demo, 10 seconds
 i "Raining" 0 10 1 600
+
 e
 
 </CsScore>
