@@ -14,6 +14,7 @@ nchnls = 2
 
 #include "soundbites.orc"
 #include "soundscapes.orc"
+#include "fire.orc"
 #include "rain.orc"
 #include "wind.orc"
 
@@ -23,7 +24,7 @@ nchnls = 2
 
 </CsInstruments>
 <CsScore>
-b 0
+
 ; Walk demo, about 4s long
 i "WalkDemo" 0 10 1
 
@@ -56,6 +57,14 @@ i "Clang" ^+.5 0.8 1.0
 b 30
 ; Rain demo, 10 seconds
 i "Raining" 0 10 1 600
+
+b 40
+; Fire demo, 15 seconds
+i "FireDemo" 0 10 1
+i "FireDemo" ^+1 10 1
+i "FireDemo" ^+1 10 1
+i "FireDemo" ^+1 10 1
+i "FireDemo" ^+1 10 1
 
 e
 
