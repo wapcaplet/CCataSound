@@ -16,8 +16,8 @@ aFinal          butterhp        aClipped, 25    ; 25 hz high-pass again to softe
                 opcode          Hissing, a, a   ; Turn a noise stream into a sputtering hissing sound
 ;----------------------------------------------------------------------------------------------------------------------;
 aNoise          xin                             ; Take noise from input source
-aHiss           butterhp        aNoise, 1000    ; Steady high-pitched hissing
-aWobble         butterlp        aNoise, 1       ; Slow wobble from low-frequency noise
+aHiss           butterhp        aNoise, 1000    ; High-pass gives steady high-pitched hissing
+aWobble         butterlp        aNoise, 1       ; Low-pass gives slow wobble
                                                 ; Magnify effect of sputtering (same formula as Farnell)
 aSputter        =               600 * (aWobble*10)^4
 aFinal          =               aHiss*aSputter  ; Hiss, but in a sputtering way
@@ -33,8 +33,9 @@ iDurMs          random          1, 30           ; 1-30 ms duration for single cr
 iFreq           =               1500 + iDurMs * 500
 aBand           butterbp        aNoise, iFreq, 1000
                                                 ; Exponential envelope for a sharp crack (converting iDurMs to sec)
+aCrack          clip            aBand*10, 0, 1  ; Boost amplitude and clip at 1
 kEnv            expon           1, iDurMs*0.001, 0.001
-aFinal          =               aBand * kEnv
+aFinal          =               aCrack * kEnv
                 xout            aFinal
                 endop
 
@@ -44,16 +45,16 @@ aFinal          =               aBand * kEnv
 aNoise          xin                             ; Take noise from input source
 kZero           k               0               ; Zero signal to output when no crackles are occurring
 aPopper         butterlp        aNoise, 1       ; Use low-passed input noise as a trigger envelope
-kPopper         k               aPopper         ; Convert to k-rate
-kCrackle        trigger         kPopper, 0, 0   ; Trigger when popper crosses zero in a positive direction
+kPopper         k               aPopper         ; Convert popper to k-rate
+kCrackle        trigger         kPopper, 0, 2   ; Trigger when popper crosses zero in either direction
 
-                if( kCrackle == 1 ) then
-aFinal          Crack           aNoise          ; Make a crack sound
-                else
+        if( kCrackle == 1 ) then
+aFinal          Crack           aNoise          ; Make a crack sound, using input noise source
+        else
 aFinal          a               kZero           ; Output silence
-                endif
+        endif
 
-                xout            aFinal          ; TODO: Scaling (crackles are quite faint)
+                xout            aFinal
                 endop
 
 
@@ -62,7 +63,7 @@ aFinal          a               kZero           ; Output silence
 iAmp, kLap, kHiss, kCrack       xin             ; Intensity levels, from 0-1
 
 aNoise          noise           iAmp, 0         ; All sounds are generated from the same noise source for coherency
-aLapping        Lapping         aNoise*0.5
+aLapping        Lapping         aNoise*0.3
 aHissing        Hissing         aNoise
 aCrackling      Crackling       aNoise
 
@@ -77,7 +78,12 @@ aFinal          =               aLapping*kLap + aHissing*kHiss + aCrackling*kCra
                 instr           FireDemo        ; Demo of Fire opcode with parameterized intensity
 ;----------------------------------------------------------------------------------------------------------------------;
 iAmp            =               p4
-aSig            Fire            iAmp, 0.2, 0.5, 1.0
+aF1             Fire            iAmp, 0.4, 0.6, 0.5
+aF2             Fire            iAmp, 0.2, 0.8, 0.8
+aF3             Fire            iAmp, 0.1, 0.7, 0.9
+aF4             Fire            iAmp, 0.1, 0.5, 1.0
+
+aSig            =               aF1 + aF2 + aF3 + aF4
                 outs            aSig, aSig
                 endin
 

@@ -59,12 +59,8 @@ b 30
 i "Raining" 0 10 1 600
 
 b 40
-; Fire demo, 15 seconds
+; Fire demo, 10 seconds
 i "FireDemo" 0 10 1
-i "FireDemo" ^+1 10 1
-i "FireDemo" ^+1 10 1
-i "FireDemo" ^+1 10 1
-i "FireDemo" ^+1 10 1
 
 e
 
