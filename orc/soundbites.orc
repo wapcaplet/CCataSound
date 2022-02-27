@@ -1,23 +1,5 @@
 ; Partial or component sounds that may be reused for several effects
 
-                instr           Clang           ; Clang, as a strike on a metal bar
-;----------------------------------------------------------------------------------------------------------------------;
-iDur            =               p3              ; duration determines 30db decay time
-iAmp            =               p4              ; FIXME: iAmp is not used for barmodel
-iHFloss         =               0.1             ; high-frequency loss; lower is brighter, higher duller
-iPos            =               0.837           ; strike position, very sensitive to strike width
-iVel            =               16000           ; strike velocity
-iWid            =               0.02            ; strike width; lower is sharper/brighter
-kScan           =               0.6             ; scanning frequency
-                                                ; subsonic values give nice modulation,
-                                                ; audible range leads to changes in timbre
-
-aClang          barmodel        2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
-aSig            =               aClang
-                outs            aSig, aSig
-                endin
-
-
                 instr           Bonk            ; Bonk, as a strike against wood
 ;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3              ; duration determines 30db decay time

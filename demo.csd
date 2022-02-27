@@ -50,10 +50,6 @@ i "Bonk" ^+.5 0.2 1.0
 i "Bonk" ^+.5 0.4 1.0
 i "Bonk" ^+.5 0.6 1.0
 i "Bonk" ^+.5 0.8 1.0
-i "Clang" ^+.5 0.2 1.0
-i "Clang" ^+.5 0.4 1.0
-i "Clang" ^+.5 0.6 1.0
-i "Clang" ^+.5 0.8 1.0
 
 b 30
 ; Rain demo, 10 seconds
@@ -62,10 +58,6 @@ i "Raining" 0 10 1 600
 b 40
 ; Fire demo, 10 seconds
 i "FireDemo" 0 10 1
-
-b 50
-; Ping demo, 5 seconds
-i "PingDemo" 0 5 1
 
 e
 
