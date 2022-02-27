@@ -56,13 +56,16 @@ aSig            =               aSwish * aSwishEnv
                 endin
 
 
+#include "resonate.orc"
+
                 instr           CreakRising     ; Creak sound, rising in pitch, as when opening a door
 ;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
 kPitchEnv       expon           0.05, iDur, 0.001
 aCreak          mpulse          iAmp, kPitchEnv
-aSig            =               aCreak
+aCreakWood      WoodReson       aCreak, 125
+aSig            =               aCreakWood
                 outs aSig, aSig
                 endin
 
@@ -73,7 +76,8 @@ iDur            =               p3
 iAmp            =               p4
 kPitchEnv       expon           0.001, iDur, 0.05
 aCreak          mpulse          iAmp, kPitchEnv
-aSig            =               aCreak
+aCreakWood      WoodReson       aCreak, 125
+aSig            =               aCreakWood
                 outs            aSig, aSig
                 endin
 
