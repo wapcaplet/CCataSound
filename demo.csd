@@ -15,6 +15,7 @@ nchnls = 2
 #include "soundbites.orc"
 #include "soundscapes.orc"
 #include "fire.orc"
+#include "metal.orc"
 #include "rain.orc"
 #include "wind.orc"
 
@@ -61,6 +62,10 @@ i "Raining" 0 10 1 600
 b 40
 ; Fire demo, 10 seconds
 i "FireDemo" 0 10 1
+
+b 50
+; Ping demo, 5 seconds
+i "PingDemo" 0 5 1
 
 e
 
