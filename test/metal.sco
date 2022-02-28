@@ -19,10 +19,15 @@ nchnls = 2
 <CsScore>
 
 b 0
+
 ; Ping demo, 5 seconds
 i "PingDemo" 0 5 1
 
 b 5
+; Dink demo, 5 seconds
+i "DinkDemo" 0 5 1
+
+b 10
 ; Clanging demo, 2 seconds
 i "Clang" 0 0.2 1.0
 i "Clang" ^+.5 0.4 1.0
