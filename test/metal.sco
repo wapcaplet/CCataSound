@@ -19,7 +19,6 @@ nchnls = 2
 <CsScore>
 
 b 0
-
 ; Ping demo, 5 seconds
 i "PingDemo" 0 5 1
 
@@ -33,6 +32,10 @@ i "Clang" 0 0.2 1.0
 i "Clang" ^+.5 0.4 1.0
 i "Clang" ^+.5 0.6 1.0
 i "Clang" ^+.5 0.8 1.0
+
+b 12
+; Latching demo, 3 seconds
+i "LatchingDemo" 0 3 1
 
 e
 

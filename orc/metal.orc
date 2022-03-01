@@ -51,6 +51,53 @@ aClipped        clip            aSig, 0, iAmp
 
 
 ;----------------------------------------------------------------------------------------------------------------------;
+; Metallic instruments
+;----------------------------------------------------------------------------------------------------------------------;
+
+                instr           Clang           ; Clang, as a strike on a metal bar
+;----------------------------------------------------------------------------------------------------------------------;
+iDur            =               p3              ; duration determines 30db decay time
+iAmp            =               p4              ; FIXME: iAmp is not used for barmodel
+iHFloss         =               0.1             ; high-frequency loss; lower is brighter, higher duller
+iPos            =               0.837           ; strike position, very sensitive to strike width
+iVel            =               16000           ; strike velocity
+iWid            =               0.02            ; strike width; lower is sharper/brighter
+kScan           =               0.6             ; scanning frequency
+                                                ; subsonic values give nice modulation,
+                                                ; audible range leads to changes in timbre
+
+aClang          barmodel        2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
+aSig            =               aClang
+                outs            aSig, aSig
+                endin
+
+
+#include "resonate.orc"
+
+                instr           Latching        ; Like a door latch striking, sliding, and clicking into place
+;----------------------------------------------------------------------------------------------------------------------;
+iDur            =               p3              ; Duration from 0.15 to 0.3 seconds is appropriate
+iAmp            =               p4
+iF1             =               3103            ; TODO: Choose better frequencies
+iF2             =               4850
+iF3             =               5375
+                                                ; Latch tongue hitting strike plate - tail gives the sliding sound
+aDink           Dink            iAmp, iDur*.7, iF1, iF2, iF3
+
+                                                ; Ping of latch engaging
+aPing           Dink            iAmp, iDur*.3, iF1*.5, iF2, iF3
+aPing           vdelay          aPing, iDur*700, iDur*1000
+
+                                                ; Mix all sounds
+aSig            =               aDink*.4 + aPing
+
+                                                ; Add door's wood resonance to everything
+aSig            WoodReson       aSig, 125
+                outs            aSig, aSig
+                endin
+
+
+;----------------------------------------------------------------------------------------------------------------------;
 ; Demos and tests of opcodes
 ;----------------------------------------------------------------------------------------------------------------------;
 
@@ -116,21 +163,10 @@ aPing           Dink            p4, p3, p5, p6, p7
                 endin
 
 
-                instr           Clang           ; Clang, as a strike on a metal bar
+                instr LatchingDemo
 ;----------------------------------------------------------------------------------------------------------------------;
-iDur            =               p3              ; duration determines 30db decay time
-iAmp            =               p4              ; FIXME: iAmp is not used for barmodel
-iHFloss         =               0.1             ; high-frequency loss; lower is brighter, higher duller
-iPos            =               0.837           ; strike position, very sensitive to strike width
-iVel            =               16000           ; strike velocity
-iWid            =               0.02            ; strike width; lower is sharper/brighter
-kScan           =               0.6             ; scanning frequency
-                                                ; subsonic values give nice modulation,
-                                                ; audible range leads to changes in timbre
-
-aClang          barmodel        2, 2, 130, iHFloss, kScan, iDur, iPos, iVel, iWid
-aSig            =               aClang
-                outs            aSig, aSig
+                schedule        "Latching", 0, 0.16, 1
+                schedule        "Latching", 1, 0.20, 1
+                schedule        "Latching", 2, 0.24, 1
                 endin
-
 
