@@ -20,19 +20,28 @@ aClipped        clip            aSig, 0, iAmp
                 endop
 
 
+                opcode          Mix3, a, iii    ; Return mix of 3 tones
+;----------------------------------------------------------------------------------------------------------------------;
+iF1, iF2, iF3                   xin             ; Amplitude, duration, and three resonant frequencies
+
+aTone1          vco2            0.3, iF1        ; Make three tones to be mixed
+aTone2          vco2            0.3, iF2
+aTone3          vco2            0.3, iF3
+                                                ; Mix tones in approximately the same way as Farnell, using product
+                                                ; and sum to get sidebands, and mix them with a cosine
+aProduct        =               aTone1 * aTone2 * aTone3
+aSum            =               aTone1 + aTone2 + aTone3
+aCos            cos             aProduct + aSum
+                xout            aCos
+                endop
+
+
                 opcode          Dink, a, iiiii  ; Three-tone sound with harmonics
 ;----------------------------------------------------------------------------------------------------------------------;
 iAmp, iDur, iF1, iF2, iF3       xin             ; Amplitude, duration, and three resonant frequencies
 
-aTone1          vco2            iAmp*.3, iF1    ; Make three tones to be mixed
-aTone2          vco2            iAmp*.3, iF2
-aTone3          vco2            iAmp*.3, iF3
-                                                ; Mix tones in approximately the same way as Farnell, using product
-                                                ; and sum to get sidebands, and mix them with a cosine and highpass
-aProduct        =               aTone1 * aTone2 * aTone3
-aSum            =               aTone1 + aTone2 + aTone3
-aCos            cos             aProduct + aSum
-aHip            butterhp        aCos, 1000
+aMix            Mix3            iF1, iF2, iF3
+aHip            butterhp        aMix, 1000
                                                 ; Pointy, fast-decay envelope (TODO: compress/expand)
 kEnv            expon           iAmp, iDur, 0.001
 aSig            =               aHip * kEnv
