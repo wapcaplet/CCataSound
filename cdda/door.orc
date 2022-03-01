@@ -1,12 +1,15 @@
 ; Door and gate sounds
 
+#include "metal.orc"
+
                 instr           DoorOpen        ; Opening door - latch sound, followed by squeak/swish
 ;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
-                schedule        "DoorLatch", 0, iDur, iAmp
+iLatchTime      =               0.2
+                schedule        "Latching", 0, iLatchTime, iAmp
                 schedule        "Swish", 0, iDur*.5, iAmp
-                schedule        "CreakRising", 0, iDur, iAmp
+                schedule        "CreakRising", iLatchTime, iDur-iLatchTime, iAmp
                 endin
 
 
@@ -14,10 +17,10 @@ iAmp            =               p4
 ;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
-                schedule        "CreakFalling", 0, iDur, iAmp
+iLatchTime      =               0.2
+                schedule        "CreakFalling", 0, iDur-iLatchTime, iAmp
                 schedule        "Swish", iDur*.3, iDur*.5, iAmp
-                schedule        "DoorLatch", iDur*.7, iDur, iAmp*.5
-                schedule        "Thud", iDur*.8, iDur, iAmp*.5
+                schedule        "Latching", iDur-iLatchTime, iLatchTime, iAmp
                 endin
 
 

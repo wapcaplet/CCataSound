@@ -15,7 +15,6 @@ nchnls = 2
 #include "soundbites.orc"
 #include "soundscapes.orc"
 #include "fire.orc"
-#include "metal.orc"
 #include "rain.orc"
 #include "wind.orc"
 
@@ -25,6 +24,7 @@ nchnls = 2
 
 </CsInstruments>
 <CsScore>
+b 0
 
 ; Walk demo, about 4s long
 i "WalkDemo" 0 10 1
