@@ -50,6 +50,20 @@ aClipped        clip            aSig, 0, iAmp
                 endop
 
 
+                opcode          Metallic, a, ai ; Make a noise source sound metallic with a given fundamental frequency
+;----------------------------------------------------------------------------------------------------------------------;
+aSig, iFreq                     xin
+iBw             =               10
+aF1             butterbp        aSig, iFreq * 1.00, iBw         ; Frequency ratios and amplitudes taken from a
+aF2             butterbp        aSig, iFreq * 1.96, iBw         ; recording of a squeaky chain-link gate hinge
+aF3             butterbp        aSig, iFreq * 2.91, iBw
+aF4             butterbp        aSig, iFreq * 3.87, iBw
+aF5             butterbp        aSig, iFreq * 4.78, iBw
+aF6             butterbp        aSig, iFreq * 5.96, iBw
+aMix            =               aF1 + aF2*0.9 + aF3*0.5 + aF4*0.3 + aF5*0.2 + aF6*0.1
+                xout            aMix
+                endop
+
 ;----------------------------------------------------------------------------------------------------------------------;
 ; Metallic instruments
 ;----------------------------------------------------------------------------------------------------------------------;
@@ -93,6 +107,19 @@ aSig            =               aDink*.4 + aPing
 
                                                 ; Add door's wood resonance to everything
 aSig            WoodReson       aSig, 125
+                outs            aSig, aSig
+                endin
+
+
+                instr           MetallicSqueak
+;----------------------------------------------------------------------------------------------------------------------;
+iDur            =               p3
+iAmp            =               p4
+iFreq           =               p5
+aNoise          noise           1, 0
+aMetNoise       Metallic        aNoise, iFreq
+kEnvAD          linseg          0, iDur*.25, 1, iDur*.5, 1, iDur*.25, 0
+aSig            =               aMetNoise * kEnvAD
                 outs            aSig, aSig
                 endin
 
