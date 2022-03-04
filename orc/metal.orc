@@ -50,16 +50,15 @@ aClipped        clip            aSig, 0, iAmp
                 endop
 
 
-                opcode          Metallic, a, ai ; Make a noise source sound metallic with a given fundamental frequency
+                opcode          Metallic, a, akk ; Make a noise source sound metallic with a given fundamental frequency
 ;----------------------------------------------------------------------------------------------------------------------;
-aSig, iFreq                     xin
-iBw             =               10
-aF1             butterbp        aSig, iFreq * 1.00, iBw         ; Frequency ratios and amplitudes taken from a
-aF2             butterbp        aSig, iFreq * 1.96, iBw         ; recording of a squeaky chain-link gate hinge
-aF3             butterbp        aSig, iFreq * 2.91, iBw
-aF4             butterbp        aSig, iFreq * 3.87, iBw
-aF5             butterbp        aSig, iFreq * 4.78, iBw
-aF6             butterbp        aSig, iFreq * 5.96, iBw
+aSig, kFreq, kBw                xin
+aF1             butterbp        aSig, kFreq * 1.00, kBw         ; Frequency ratios and amplitudes taken from a
+aF2             butterbp        aSig, kFreq * 1.96, kBw         ; recording of a squeaky chain-link gate hinge
+aF3             butterbp        aSig, kFreq * 2.91, kBw
+aF4             butterbp        aSig, kFreq * 3.87, kBw
+aF5             butterbp        aSig, kFreq * 4.78, kBw
+aF6             butterbp        aSig, kFreq * 5.96, kBw
 aMix            =               aF1 + aF2*0.9 + aF3*0.5 + aF4*0.3 + aF5*0.2 + aF6*0.1
                 xout            aMix
                 endop
