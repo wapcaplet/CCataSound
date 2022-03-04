@@ -110,13 +110,16 @@ aSig            WoodReson       aSig, 125
                 endin
 
 
-                instr           MetallicSqueak
+                instr           MetallicSqueak  ; Like an unoiled gate hinge
 ;----------------------------------------------------------------------------------------------------------------------;
 iDur            =               p3
 iAmp            =               p4
 iFreq           =               p5
 aNoise          noise           1, 0
-aMetNoise       Metallic        aNoise, iFreq
+kBandwidth      linseg          10, iDur*.7, 5, iDur*.3, 100    ; Tighten bandwidth, then loosen at the end
+                                                                ; Frequency follows a _/^^\__ two-octave curve
+kFrequency      linseg          iFreq/2, iDur*.1, iFreq, iDur*.4, iFreq, iDur*.1, iFreq/2, iDur*.5, iFreq/2
+aMetNoise       Metallic        aNoise, kFrequency, kBandwidth
 kEnvAD          linseg          0, iDur*.25, 1, iDur*.5, 1, iDur*.25, 0
 aSig            =               aMetNoise * kEnvAD
                 outs            aSig, aSig
