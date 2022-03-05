@@ -133,12 +133,13 @@ aSig            =               aThudRes
 ;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
-aNoise          unirand         iAmp/5
-kFreqEnv        line            200, iDur, 1000   ; Sweep frequency bandpass from low to high
-aSweep          reson           aNoise, kFreqEnv, 100
+aNoise          noise           1, 0
+kFreqEnv        line            200, iDur, 1000                 ; Sweep frequency bandpass from low to high
+aSweep          butterbp        aNoise, kFreqEnv, 100
+aSweep          balance         aSweep, aNoise*.8               ; Re-normalize amplitude somewhat
                                                 ; expseg gives the best 'whip' effect here
-kAmpEnv         expseg          0.001, iDur*.8, 0.901, iDur*0.2, 0.001
-aSig            =               aSweep*kAmpEnv
+kAmpEnv         expseg          0.001, iDur*.8, iAmp, iDur*0.2, 0.001
+aSig            =               aSweep * kAmpEnv
                 outs            aSig, aSig
                 endin
 
