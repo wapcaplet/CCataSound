@@ -14,6 +14,7 @@ nchnls = 2
 
 #include "soundbites.orc"
 #include "soundscapes.orc"
+#include "air.orc"
 #include "fire.orc"
 #include "rain.orc"
 #include "wind.orc"
