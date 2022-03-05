@@ -55,10 +55,6 @@ b 30
 ; Rain demo, 10 seconds
 i "Raining" 0 10 1 600
 
-b 40
-; Fire demo, 10 seconds
-i "FireDemo" 0 10 1
-
 e
 
 </CsScore>
