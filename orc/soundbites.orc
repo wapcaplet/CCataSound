@@ -1,7 +1,7 @@
 ; Partial or component sounds that may be reused for several effects
 
                 instr           Bonk            ; Bonk, as a strike against wood
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3              ; duration determines 30db decay time
 iAmp            =               p4              ; FIXME: iAmp not used
                                                 ; Same as Clang, except:
@@ -22,7 +22,7 @@ aSig            =               aClang
 
 
                 instr           DoorLatch       ; Latching sound, as on a door
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
                                                 ; latch click, shaker with 1 bean (500), no extra shakes
 aShake          shaker          iAmp, 2000, 500, 0.99, 0
@@ -33,7 +33,7 @@ aSig            =               aShake
 
 
                 instr           Footstep        ; Single footstep, heel-toe
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 iFreq           random          300, 600        ; Pitch frequency
 iBeans          random          5, 20           ; More beans is more scratchy (could be param)
@@ -45,7 +45,7 @@ aSig            =               aShake
 
 
                 instr           Swish           ; Subtle swish of air, as when opening or closing a door
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
 aSwish          pinkish         iAmp/2          ; pink noise with a lowpass filter and triangle envelope
@@ -59,7 +59,7 @@ aSig            =               aSwish * aSwishEnv
 #include "resonate.orc"
 
                 instr           CreakRising     ; Creak sound, rising in pitch, as when opening a door
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
 kPitchEnv       expon           0.05, iDur, 0.001
@@ -71,7 +71,7 @@ aSig            =               aCreakWood
 
 
                 instr           CreakFalling    ; Creak sound, falling in pitch, as when closing a door
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
 kPitchEnv       expon           0.001, iDur, 0.05
@@ -83,7 +83,7 @@ aSig            =               aCreakWood
 
 
                 instr           Splat           ; As pulping a wet zombie
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
 iDet            =               0.01            ; iDettack, ignored
@@ -102,7 +102,7 @@ aSig            =               aPlop * kPlopEnv + aSplash * kSplashEnv
 
 
                 instr           Squeak          ; Like an unlubricated metal gate
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
                                                 ; Two squeaky hinges with random pitch and pressure
@@ -120,7 +120,7 @@ aSig            =               aHinge1 * aEnv1 + aHinge2 * aEnv2
 
 
                 instr           Thud            ; Solid, low thump or thud, as when a door comes to
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 aPulse          mpulse          iAmp, 0         ; Do a pulse with no repeat
 aThudRes        reson           aPulse, 60, 25  ; Give pulse a low resonance like wood
@@ -130,7 +130,7 @@ aSig            =               aThudRes
 
 
                 instr           Whiff           ; Swishing through the air, as with a weapon
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iDur            =               p3
 iAmp            =               p4
 aNoise          unirand         iAmp/5

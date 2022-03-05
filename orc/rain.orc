@@ -1,7 +1,7 @@
 ; Rain sounds
 
                 instr           Raining         ; Water from the sky
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4              ; Amplitude (TODO: Expand to this amp at the end)
 iFreq           =               p5              ; Drip pitch frequency (Hz)
 iFreqRes1       =               iFreq*1.33      ; Drip resonances, related to base frequency

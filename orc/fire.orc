@@ -3,7 +3,7 @@
 ; Based on Andy Farnell's Pd examples from "Designing Sound"
 
                 opcode          Lapping, a, a   ; Turn a noise stream into a flame-lapping sound
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 aNoise          xin                             ; Take noise from input source
 aBand           butterbp        aNoise, 30, 2   ; 30 hz bandpass
 aHipass         butterhp        aBand*100, 25   ; 25 hz high-pass (attenuate ultra low frequencies)
@@ -14,7 +14,7 @@ aFinal          butterhp        aClipped, 25    ; 25 hz high-pass again to softe
 
 
                 opcode          Hissing, a, a   ; Turn a noise stream into a sputtering hissing sound
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 aNoise          xin                             ; Take noise from input source
 aHiss           butterhp        aNoise, 1000    ; High-pass gives steady high-pitched hissing
 aWobble         butterlp        aNoise, 2       ; Low-pass gives slow wobble
@@ -26,7 +26,7 @@ aFinal          =               aHiss*aSputter  ; Hiss, but in a sputtering way
 
 
                 opcode          Crack, a, a     ; Turn a noise stream into a single crack/pop sound
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 aNoise          xin                             ; Take noise from input source
 iDurMs          random          5, 50           ; Millisecond duration for a single crack
                                                 ; Bandpass with 2k-15.5k Hz center frequency and wide bandwidth
@@ -41,7 +41,7 @@ aFinal          =               aCrack * kEnv
 
 
                 opcode          Crackling, a, a ; Turn a noise stream into a crackling sound
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 aNoise          xin                             ; Take noise from input source
 kZero           k               0               ; Zero signal to output when no crackles are occurring
 aPopper         butterlp        aNoise, 1       ; Use low-passed input noise as a trigger envelope
@@ -59,7 +59,7 @@ aFinal          a               kZero           ; Output silence
 
 
                 opcode          Fire, a, ikkk   ; Fire with parameterized lapping, hissing, and crackling intensity
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp, kLap, kHiss, kCrack       xin             ; Intensity levels, from 0-1
 
 aNoise          noise           iAmp, 0         ; All sounds are generated from the same noise source for coherency
@@ -76,7 +76,7 @@ aFinal          =               aLapping + aHissing + aCrackling
 ;----------------------------------------------------------------------------------------------------------------------;
 
                 instr           FireDemo        ; Demo of Fire opcode with parameterized intensity
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 aF1             Fire            iAmp, 0.4, 0.6, 0.5
 aF2             Fire            iAmp, 0.2, 0.8, 0.8
@@ -89,7 +89,7 @@ aSig            =               aF1 + aF2 + aF3 + aF4
 
 
                 instr           LappingDemo
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 aNoise          noise           iAmp, 0
 aSig            Lapping         aNoise
@@ -98,7 +98,7 @@ aSig            Lapping         aNoise
 
 
                 instr           HissingDemo
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 aNoise          noise           iAmp, 0
 aSig            Hissing         aNoise
@@ -107,7 +107,7 @@ aSig            Hissing         aNoise
 
 
                 instr           CracklingDemo
-;----------------------------------------------------------------------------------------------------------------------;
+;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
 aNoise          noise           iAmp, 0
 aSig            Crackling       aNoise
