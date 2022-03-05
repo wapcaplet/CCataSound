@@ -45,7 +45,9 @@ advantage of the bottomless reservoir of sonic possibility that Csound provides.
 See the [Style Guide](doc/STYLE.md) for recommended Csound coding style.
 
 
-## Csound references
+## References
+
+Csound:
 
 - [Csound Web IDE](https://ide.csound.com/)
   and [Demo by Steven Yi](https://www.youtube.com/watch?v=4uhqIf0nshQ)
@@ -54,3 +56,13 @@ See the [Style Guide](doc/STYLE.md) for recommended Csound coding style.
 - [The Csound Book, Chapter 1](http://www.csounds.com/chapter1/)
 - [The Canonical Csound Reference Manual](https://csound.com/docs/manual/indexframes.html)
 - [Csound Algorithmic Composition Tutorial by Michael Gogins](https://michaelgogins.tumblr.com/post/45943759685/tutorials-for-csound-and-csoundac)
+
+Pure Data:
+
+- [Pure Data FLOSS manual](https://archive.flossmanuals.net/pure-data/)
+
+Sound design:
+
+- [Designing Sound](https://mitpress.mit.edu/books/designing-sound) by Andy Farnell,
+  with [Pure Data Code Examples](http://mitpress2.mit.edu/designingsound/) from the book
+
