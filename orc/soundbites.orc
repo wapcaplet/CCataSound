@@ -89,24 +89,6 @@ aSig            =               aPlop * kPlopEnv + aSplash * kSplashEnv
                 endin
 
 
-                instr           Squeak          ; Like an unlubricated metal gate
-;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
-iDur            =               p3
-iAmp            =               p4
-                                                ; Two squeaky hinges with random pitch and pressure
-aHinge1         wgbow           0.6, random(800, 1600), random(0.3, 0.4), 0.1, 0, 0
-aHinge2         wgbow           0.4, random(500, 700), random(0.2, 0.3), 0.1, 0, 0
-                                                ; Hinge loudness curves are slightly different
-aEnv1           expseg          iAmp*0.1, iDur*.1, iAmp, iDur*.9, 0.00001
-aEnv2           expseg          iAmp*0.1, iDur*.2, iAmp, iDur*.9, 0.0001
-                                                ; These settings make a pretty good pair; consider
-                                                ; refactoring to two separate soundbites for more
-                                                ; flexibility in params
-aSig            =               aHinge1 * aEnv1 + aHinge2 * aEnv2
-                outs            aSig, aSig
-                endin
-
-
                 instr           Thud            ; Solid, low thump or thud, as when a door comes to
 ;---------------+---------------+---------------+---------------+---------------+---------------+----------------------;
 iAmp            =               p4
