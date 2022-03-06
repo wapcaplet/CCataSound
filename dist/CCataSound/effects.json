@@ -1,0 +1,8 @@
+[
+  {
+    "type": "sound_effect",
+    "id": "menu_move",
+    "volume": 100,
+    "files": [ "menu/move.ogg" ]
+  }
+]
