@@ -53,7 +53,8 @@ Csound:
 - [Csound Realtime Examples](http://iainmccurdy.org/csound.html) (CC-BY-NC-SA 4.0 International)
 - [Csound Web IDE](https://ide.csound.com/)
   and [Demo by Steven Yi](https://www.youtube.com/watch?v=4uhqIf0nshQ)
-- [Cabbage](https://cabbageaudio.com) cross-platform Csound framework (CC-BY-NC-SA 4.0 International)
+- [Cabbage](https://cabbageaudio.com) cross-platform Csound framework
+  (with examples licensed CC-BY-NC-SA 4.0 International)
 - [The Csound Book, Chapter 1](http://www.csounds.com/chapter1/)
 - [The Canonical Csound Reference Manual](https://csound.com/docs/manual/indexframes.html)
 - [Csound Algorithmic Composition Tutorial by Michael Gogins](https://michaelgogins.tumblr.com/post/45943759685/tutorials-for-csound-and-csoundac)
